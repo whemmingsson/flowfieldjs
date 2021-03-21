@@ -28,7 +28,7 @@ class Particle {
     follow(flowField) {
         const x = floor(this.position.x / Settings.Field.SCALE);
         const y = floor(this.position.y / Settings.Field.SCALE);
-        applyForce(flowField[y][x]);
+        this.applyForce(flowField[y][x]);
     }
 
     stopAtEdges() {
@@ -42,11 +42,11 @@ class Particle {
         }
         if (this.position.y >= height) {
             this.position.y = 1;
-            updatePrev();
+            this.updatePrev();
         }
         if (this.position.y <= 0) {
-            this.this.position.y = height - 1;
-            updatePrev();
+            this.position.y = height - 1;
+            this.updatePrev();
         }
     }
 
@@ -68,7 +68,7 @@ class Particle {
         else {
             stroke(255, Settings.Particle.ALPHA);
         }
-        
+
         strokeWeight(Settings.Particle.THICKNESS);
 
         line(this.prevPosition.x, this.prevPosition.y, this.position.x, this.position.y);

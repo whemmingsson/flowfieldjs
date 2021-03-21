@@ -4,11 +4,11 @@ class Flowfield {
         this.timeOffset = 0;
         this.rows = rows;
         this.columns = columns;
-        //this.vectors = new PVector[rows][columns]; // TODO: Make matrix
+        this.vectors = [];
         this.create();
     }
 
-    functiongetVectors() {
+    getVectors() {
         return this.vectors;
     }
 
@@ -19,11 +19,11 @@ class Flowfield {
     create() {
         let yOffset = 0;
         for (let y = 0; y < this.rows; y++) {
+            this.vectors[y] = [];
             let xOffset = 0;
             for (let x = 0; x < this.columns; x++) {
                 xOffset += Settings.Field.OFFSET_SPEED;
-                const noise = noise(xOffset, yOffset, this.timeOffset);
-                this.setVectorAt(createForceVector(noise), x, y);
+                this.setVectorAt(this.createForceVector(noise(xOffset, yOffset, this.timeOffset)), x, y);
             }
             yOffset += Settings.Field.OFFSET_SPEED;
         }
