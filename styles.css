@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    background: #11ee44;
+}
+
+aside {
+    background: #11aaee;
+}
