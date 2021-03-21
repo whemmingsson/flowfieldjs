@@ -31,24 +31,24 @@ class Particle {
         applyForce(flowField[y][x]);
     }
 
-    //     stopAtEdges(){
-    //       if(this.position.x >= width){
-    //         this.position.x = 1;
-    //         updatePrev();
-    //       }
-    //       if(this.position.x <= 0){
-    //         this.position.x = width -1;
-    //         updatePrev();
-    //       }
-    //        if(this.position.y >= height){
-    //         this.position.y = 1;
-    //         updatePrev();
-    //       }
-    //        if(this.position.y <= 0){
-    //         this.position.y = height -1;
-    //         updatePrev();
-    //       }
-    //     }
+    stopAtEdges() {
+        if (this.position.x >= width) {
+            this.position.x = 1;
+            this.updatePrev();
+        }
+        if (this.position.x <= 0) {
+            this.position.x = width - 1;
+            this.updatePrev();
+        }
+        if (this.position.y >= height) {
+            this.position.y = 1;
+            updatePrev();
+        }
+        if (this.position.y <= 0) {
+            this.this.position.y = height - 1;
+            updatePrev();
+        }
+    }
 
     updatePrev() {
         this.prevPosition.x = this.position.x;
@@ -68,6 +68,7 @@ class Particle {
         else {
             stroke(255, Settings.Particle.ALPHA);
         }
+        
         strokeWeight(Settings.Particle.THICKNESS);
 
         line(this.prevPosition.x, this.prevPosition.y, this.position.x, this.position.y);
