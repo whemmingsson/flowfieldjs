@@ -5,10 +5,10 @@ class Flowfield {
         this.rows = rows;
         this.columns = columns;
         //this.vectors = new PVector[rows][columns]; // TODO: Make matrix
-        create();
+        this.create();
     }
 
-    getVectors() {
+    functiongetVectors() {
         return this.vectors;
     }
 
@@ -23,7 +23,7 @@ class Flowfield {
             for (let x = 0; x < this.columns; x++) {
                 xOffset += Settings.Field.OFFSET_SPEED;
                 const noise = noise(xOffset, yOffset, this.timeOffset);
-                setVectorAt(createForceVector(noise), x, y);
+                this.setVectorAt(createForceVector(noise), x, y);
             }
             yOffset += Settings.Field.OFFSET_SPEED;
         }
