@@ -1,17 +1,37 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    background: #222;
+    color: #fff;
+}
+
+label {
+    display: inline-block;
+    margin-bottom:5px;
 }
 
 .wrapper {
+    padding: 20px;
+}
+
+main {
     display: flex;
     flex-direction: row;
 }
 
-main {
-    background: #11ee44;
+h1 {
+    font-size: 3rem;
+    margin-bottom: 15px
 }
 
-aside {
-    background: #11aaee;
+section.controls {
+    margin-left: 20px;
+    background: #fff;
+    color: #222;
+    padding:20px;
+    max-width: 200px;
 }
