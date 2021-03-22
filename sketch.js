@@ -84,6 +84,9 @@ function drawVector(x, y) {
     translate(x * Settings.FIELD_SCALE + Settings.FIELD_SCALE, y * Settings.FIELD_SCALE + Settings.FIELD_SCALE);
     rotate(field.getVectorAt(x, y).heading());
     line(0, 0, Settings.FIELD_SCALE, 0);
+    const arrowHead = Settings.FIELD_SCALE/5;
+    line(Settings.FIELD_SCALE-arrowHead, arrowHead, Settings.FIELD_SCALE, 0);
+    line(Settings.FIELD_SCALE-arrowHead,-arrowHead, Settings.FIELD_SCALE, 0);
     pop();
 }
 
