@@ -26,8 +26,8 @@ class Particle {
     }
 
     follow(flowField) {
-        const x = floor(this.position.x / Settings.Field.SCALE);
-        const y = floor(this.position.y / Settings.Field.SCALE);
+        const x = floor(this.position.x / Settings.FIELD_SCALE);
+        const y = floor(this.position.y / Settings.FIELD_SCALE);
         this.applyForce(flowField[y][x]);
     }
 

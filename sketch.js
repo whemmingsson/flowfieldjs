@@ -1,8 +1,8 @@
 let particles;
 let field;
 
-let slider;
-
+let sliderControls = [];
+let checkboxControls = [];
 
 function setup() {
     var canvas = createCanvas(1400, 800);
@@ -15,19 +15,13 @@ function setup() {
     }
 
     initialize();
-
-    // Experimental slider
-    let label = createElement('label', 'Number of particles');
-    slider = createSlider(10, 1000, 50, 50);
-    slider.style('width', '100%');
-    label.parent('controls');
-    slider.parent('controls');
+    setupControls(); 
 }
 
 function initialize() {
     particles = [];
     initParticles();
-    field = new Flowfield(floor(height / Settings.Field.SCALE), floor(width / Settings.Field.SCALE));
+    field = new Flowfield(floor(height / Settings.FIELD_SCALE), floor(width / Settings.FIELD_SCALE));
     if (Settings.Env.DRAW_VECTORS) {
         drawVectorsInField();
     }
@@ -36,9 +30,17 @@ function initialize() {
 }
 
 function initParticles() {
-    for (let i = 0; i < Settings.Env.NUMBER_OF_PARTICLES; i++) {
+    for (let i = 0; i < Settings.NUMBER_OF_PARTICLES; i++) {
         particles.push(new Particle(createVector(random(width), random(height))));
     }
+}
+
+function setupControls() {
+   let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 50, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
+   let fieldSlider = new SliderControl("Field scale", 20, 120, 40, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
+
+   sliderControls.push(numParticlesSlider);
+   sliderControls.push(fieldSlider);
 }
 
 function draw() {
@@ -62,11 +64,8 @@ function draw() {
         drawFps();
     }
 
-    // TODO: Find a way to generalize this
-    let val = slider.value();
-    if(val !== Settings.Env.NUMBER_OF_PARTICLES){
-        Settings.Env.NUMBER_OF_PARTICLES = val;
-        initialize();
+    for(let control of sliderControls){
+        control.update();
     }
 }
 
@@ -82,14 +81,14 @@ function drawVectorsInField() {
 function drawVector(x, y) {
     push();
     stroke(160);
-    translate(x * Settings.Field.SCALE, y * Settings.Field.SCALE);
+    translate(x * Settings.FIELD_SCALE + Settings.FIELD_SCALE, y * Settings.FIELD_SCALE + Settings.FIELD_SCALE);
     rotate(field.getVectorAt(x, y).heading());
-    line(0, 0, Settings.Field.SCALE, 0);
+    line(0, 0, Settings.FIELD_SCALE, 0);
     pop();
 }
 
 function updateAndDrawParticles() {
-    for (let i = 0; i < Settings.Env.NUMBER_OF_PARTICLES; i++) {
+    for (let i = 0; i < Settings.NUMBER_OF_PARTICLES; i++) {
         particles[i].follow(field.vectors);
         particles[i].update();
         particles[i].stopAtEdges();

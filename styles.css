@@ -35,3 +35,7 @@ section.controls {
     padding:20px;
     max-width: 200px;
 }
+
+section.controls input {
+    margin-bottom:10px;
+}
