@@ -36,11 +36,18 @@ function initParticles() {
 }
 
 function setupControls() {
-   let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 50, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
-   let fieldSlider = new SliderControl("Field scale", 20, 120, 40, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
+   let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
+   let fieldSlider = new SliderControl("Field scale", 20, 120, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
+   let forceSlider = new SliderControl("Force strength", 0, 5, 0.1, "FORCE_STRENGTH", SettingsCategories.FIELD);
+   let speedSlider = new SliderControl("Offset speed", 0.01, 1, 0.005, "OFFSET_SPEED", SettingsCategories.FIELD);
+   let timeSpeedSlider = new SliderControl("Time offset speed", 0, 0.1, 0.005, "TIME_OFFSET_SPEED", SettingsCategories.FIELD);
+
 
    sliderControls.push(numParticlesSlider);
    sliderControls.push(fieldSlider);
+   sliderControls.push(forceSlider);
+   sliderControls.push(speedSlider);
+   sliderControls.push(timeSpeedSlider);
 }
 
 function draw() {

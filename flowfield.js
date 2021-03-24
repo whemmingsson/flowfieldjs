@@ -22,21 +22,21 @@ class Flowfield {
             this.vectors[y] = [];
             let xOffset = 0;
             for (let x = 0; x < this.columns; x++) {
-                xOffset += Settings.Field.OFFSET_SPEED;
+                xOffset += Settings.OFFSET_SPEED;
                 this.setVectorAt(this.createForceVector(noise(xOffset, yOffset, this.timeOffset)), x, y);
             }
-            yOffset += Settings.Field.OFFSET_SPEED;
+            yOffset += Settings.OFFSET_SPEED;
         }
 
         if (Settings.Field.ENABLE_TIME) {
-            this.timeOffset += Settings.Field.TIME_OFFSET_SPEED;
+            this.timeOffset += Settings.TIME_OFFSET_SPEED;
         }
     }
 
     createForceVector(noise) {
         let angle = noise * TWO_PI;
         let v = p5.Vector.fromAngle(angle);
-        v.setMag(Settings.Field.FORCE_STRENGTH);
+        v.setMag(Settings.FORCE_STRENGTH);
         return v;
     }
 
