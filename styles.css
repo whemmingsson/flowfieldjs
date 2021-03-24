@@ -49,3 +49,7 @@ section.controls h3 {
 section.controls h3:not(:first-of-type) {
   margin-top: 15px;
 }
+
+.cb-wrapper label {
+  margin-left: 5px;
+}
