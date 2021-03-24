@@ -36,8 +36,8 @@ function initParticles() {
 }
 
 function setupControls() {
-   let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 50, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
-   let fieldSlider = new SliderControl("Field scale", 20, 120, 40, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
+   let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
+   let fieldSlider = new SliderControl("Field scale", 20, 120, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
 
    sliderControls.push(numParticlesSlider);
    sliderControls.push(fieldSlider);

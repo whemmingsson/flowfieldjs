@@ -23,7 +23,8 @@ class Flowfield {
             let xOffset = 0;
             for (let x = 0; x < this.columns; x++) {
                 xOffset += Settings.Field.OFFSET_SPEED;
-                this.setVectorAt(this.createForceVector(noise(xOffset, yOffset, this.timeOffset)), x, y);
+                let n = noise(xOffset, yOffset, this.timeOffset);
+                this.setVectorAt(this.createForceVector(n), x, y);
             }
             yOffset += Settings.Field.OFFSET_SPEED;
         }

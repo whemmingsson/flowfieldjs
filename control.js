@@ -6,13 +6,13 @@ const SettingsCategories = {
 
 class SliderControl {
 
-    constructor(label, minValue, maxValue, startValue, stepSize, settingsKey, category, onUpdateCallback){
+    constructor(label, minValue, maxValue, stepSize, settingsKey, category, onUpdateCallback){
         this.label = label;
         this.settingsKey = settingsKey;
         this.category = category;
 
-        this.labelElement = createElement('label', this.getLabelText(startValue));
-        this.sliderElement = createSlider(minValue, maxValue, startValue,stepSize);
+        this.labelElement = createElement('label', this.getLabelText(Settings[settingsKey]));
+        this.sliderElement = createSlider(minValue, maxValue, Settings[settingsKey], stepSize);
         this.sliderElement.style('width', '100%');
         this.labelElement.parent('controls');
         this.sliderElement.parent('controls');
