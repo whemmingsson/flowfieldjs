@@ -2,7 +2,6 @@ let particles;
 let field;
 
 let sliderControls = [];
-let checkboxControls = [];
 
 const FPS_DRAW_RATE = 15; // Every x frames
 let fpsCounter = 0;
@@ -59,12 +58,12 @@ function setupControls() {
   CheckboxControl.create("Render noise", "DRAW_NOISE", SettingsCategories.ENV, clearBackground);
   CheckboxControl.create("Render vectors", "DRAW_VECTORS", SettingsCategories.ENV, clearBackground);
   CheckboxControl.create("Render particles", "DRAW_PARTICLES", SettingsCategories.ENV, clearBackground);
-  CheckboxControl.create("Render fps info", "DRAW_FPS", SettingsCategories.ENV, clearBackground);
+  //CheckboxControl.create("Render fps info", "DRAW_FPS", SettingsCategories.ENV, clearBackground);
   CheckboxControl.create("Rainbow mode (Experimental)", "USE_RAINBOW", SettingsCategories.ENV, switchColorMode);
 
   // Field
   HeadingControl.create("Flowfield");
-  let fieldSlider = new SliderControl("Field scale", 20, 120, 5, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
+  let fieldSlider = new SliderControl("Field scale", 30, 120, 5, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
   let forceSlider = new SliderControl("Force strength", 0.1, 5, 0.1, "FORCE_STRENGTH", SettingsCategories.FIELD);
   let speedSlider = new SliderControl("Zoom level", 0, 0.5, 0.005, "OFFSET_SPEED", SettingsCategories.FIELD);
   let timeSpeedSlider = new SliderControl("Time offset speed", 0, 0.1, 0.005, "TIME_OFFSET_SPEED", SettingsCategories.FIELD);
