@@ -41,8 +41,7 @@ function setupControls() {
    let forceSlider = new SliderControl("Force strength", 0, 5, 0.1, "FORCE_STRENGTH", SettingsCategories.FIELD);
    let speedSlider = new SliderControl("Offset speed", 0.01, 1, 0.005, "OFFSET_SPEED", SettingsCategories.FIELD);
    let timeSpeedSlider = new SliderControl("Time offset speed", 0, 0.1, 0.005, "TIME_OFFSET_SPEED", SettingsCategories.FIELD);
-
-
+   
    sliderControls.push(numParticlesSlider);
    sliderControls.push(fieldSlider);
    sliderControls.push(forceSlider);
@@ -91,6 +90,9 @@ function drawVector(x, y) {
     translate(x * Settings.FIELD_SCALE + Settings.FIELD_SCALE, y * Settings.FIELD_SCALE + Settings.FIELD_SCALE);
     rotate(field.getVectorAt(x, y).heading());
     line(0, 0, Settings.FIELD_SCALE, 0);
+    const arrowHead = Settings.FIELD_SCALE/5;
+    line(Settings.FIELD_SCALE-arrowHead, arrowHead, Settings.FIELD_SCALE, 0);
+    line(Settings.FIELD_SCALE-arrowHead,-arrowHead, Settings.FIELD_SCALE, 0);
     pop();
 }
 

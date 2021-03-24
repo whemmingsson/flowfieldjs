@@ -9,19 +9,19 @@ let Settings = {
         ENABLE_TIME: true,
         OFFSET_SPEED: 0.08,
         FORCE_STRENGTH: 0.6,
-        TIME_OFFSET_SPEED: 0.01,
+        TIME_OFFSET_SPEED: 0.05,
         DETAIL: 15
     },
     Particle: {
         MAX_SPEED: 5,
         THICKNESS: 2,
-        ALPHA: 255,
+        ALPHA: 2,
     },
     Env: {
         
-        USE_RAINBOW: true,
-        DRAW_VECTORS: true,
-        DRAW_PARTICLES: false,
+        USE_RAINBOW: false,
+        DRAW_VECTORS: false,
+        DRAW_PARTICLES: true,
         DRAW_FPS: true,
     }
 };
