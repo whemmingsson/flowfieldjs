@@ -8,7 +8,7 @@ function setup() {
     var canvas = createCanvas(1400, 800);
     canvas.parent('sketch');
 
-    noiseDetail(Settings.Field.DETAIL);
+    noiseDetail(Settings.DETAIL);
 
     if (Settings.Env.USE_RAINBOW) {
         colorMode(HSB, 255);
@@ -36,17 +36,32 @@ function initParticles() {
 }
 
 function setupControls() {
+    // Environment
+   let envHeading = new HeadingControl("Environment");
    let numParticlesSlider = new SliderControl("Number of particles", 5, 1000, 5, "NUMBER_OF_PARTICLES", SettingsCategories.ENV, initialize);
+
+   // Field
+   let fieldHeading = new HeadingControl("Flowfield");
    let fieldSlider = new SliderControl("Field scale", 20, 120, 20, "FIELD_SCALE", SettingsCategories.FIELD, initialize);
-   let forceSlider = new SliderControl("Force strength", 0, 5, 0.1, "FORCE_STRENGTH", SettingsCategories.FIELD);
-   let speedSlider = new SliderControl("Offset speed", 0.01, 1, 0.005, "OFFSET_SPEED", SettingsCategories.FIELD);
+   let forceSlider = new SliderControl("Force strength", 0.1, 5, 0.1, "FORCE_STRENGTH", SettingsCategories.FIELD);
+   let speedSlider = new SliderControl("Zoom level", 0, 0.5, 0.005, "OFFSET_SPEED", SettingsCategories.FIELD);
    let timeSpeedSlider = new SliderControl("Time offset speed", 0, 0.1, 0.005, "TIME_OFFSET_SPEED", SettingsCategories.FIELD);
-   
+
+   // Particles
+   let particlesHeading = new HeadingControl("Particles");
+   let maxSpeedSlider = new SliderControl("Max speed", 3, 15, 1, "MAX_SPEED", SettingsCategories.PARTICLE);
+   let thicknessSlider = new SliderControl("Thickness", 1, 30, 1, "THICKNESS", SettingsCategories.PARTICLE);
+   let alphaSlider = new SliderControl("Alpha", 1, 255, 1, "ALPHA", SettingsCategories.PARTICLE);
+
    sliderControls.push(numParticlesSlider);
    sliderControls.push(fieldSlider);
    sliderControls.push(forceSlider);
    sliderControls.push(speedSlider);
    sliderControls.push(timeSpeedSlider);
+   sliderControls.push(maxSpeedSlider);
+   sliderControls.push(thicknessSlider);
+   sliderControls.push(alphaSlider);
+
 }
 
 function draw() {

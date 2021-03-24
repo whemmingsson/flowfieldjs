@@ -43,3 +43,11 @@ class SliderControl {
         }
     }
 }
+
+class HeadingControl { 
+    constructor(label) {
+        this.label = label;
+        this.headingElement = createElement('h3', this.label);
+        this.headingElement.parent('controls');
+    }
+}

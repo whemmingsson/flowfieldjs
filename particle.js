@@ -16,7 +16,7 @@ class Particle {
 
     update() {
         this.velocity.add(this.acceleration);
-        this.velocity.limit(Settings.Particle.MAX_SPEED);
+        this.velocity.limit(Settings.MAX_SPEED);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
     }
@@ -63,13 +63,13 @@ class Particle {
         }
 
         if (Settings.Env.USE_RAINBOW) {
-            stroke(this.hue, 255, 255, Settings.Particle.ALPHA);
+            stroke(this.hue, 255, 255, Settings.ALPHA);
         }
         else {
-            stroke(255, Settings.Particle.ALPHA);
+            stroke(255, Settings.ALPHA);
         }
 
-        strokeWeight(Settings.Particle.THICKNESS);
+        strokeWeight(Settings.THICKNESS);
 
         line(this.prevPosition.x, this.prevPosition.y, this.position.x, this.position.y);
 
