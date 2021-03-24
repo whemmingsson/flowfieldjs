@@ -5,31 +5,15 @@ const SettingsCategories = {
 };
 
 class SliderControl {
-  constructor(
-    label,
-    minValue,
-    maxValue,
-    stepSize,
-    settingsKey,
-    category,
-    onUpdateCallback
-  ) {
+  constructor(label, minValue, maxValue, stepSize, settingsKey, category, onUpdateCallback) {
     this.label = label;
     this.settingsKey = settingsKey;
     this.category = category;
     this.onUpdateCallback = onUpdateCallback;
 
-    this.labelElement = createElement(
-      "label",
-      this.getLabelText(Settings[settingsKey])
-    );
+    this.labelElement = createElement("label", this.getLabelText(Settings[settingsKey]));
 
-    this.sliderElement = createSlider(
-      minValue,
-      maxValue,
-      Settings[settingsKey],
-      stepSize
-    );
+    this.sliderElement = createSlider(minValue, maxValue, Settings[settingsKey], stepSize);
     this.sliderElement.style("width", "100%");
     this.labelElement.parent("controls");
     this.sliderElement.parent("controls");
@@ -65,10 +49,7 @@ class CheckboxControl {
     this.category = category;
     this.onUpdateCallback = onUpdateCallback;
 
-    this.checkboxElement = createCheckbox(
-      this.label,
-      Settings[this.settingsKey]
-    );
+    this.checkboxElement = createCheckbox(this.label, Settings[this.settingsKey]);
 
     this.checkboxElement.class("cb-wrapper");
 
@@ -79,6 +60,10 @@ class CheckboxControl {
 
     this.checkboxElement.parent("controls");
   }
+
+  static create(label, settingsKey, category, onUpdateCallback) {
+    new CheckboxControl(label, settingsKey, category, onUpdateCallback);
+  }
 }
 
 class HeadingControl {
@@ -86,5 +71,29 @@ class HeadingControl {
     this.label = label;
     this.headingElement = createElement("h3", this.label);
     this.headingElement.parent("controls");
+  }
+
+  static create(label) {
+    new HeadingControl(label);
+  }
+}
+
+class ButtonControl {
+  constructor(label, cssClass, onClick) {
+    this.label = label;
+
+    this.buttonElement = createButton(this.label);
+    this.buttonElement.addClass(cssClass);
+    this.buttonElement.parent("controls");
+    this.buttonElement.mousePressed(onClick);
+  }
+
+  setLabel(label) {
+    this.label = label;
+    this.buttonElement.html(this.label);
+  }
+
+  toggleCssClass(cssClass) {
+    this.buttonElement.toggleClass(cssClass);
   }
 }

@@ -1,6 +1,6 @@
 let Settings = {
   NUMBER_OF_PARTICLES: 10,
-  FIELD_SCALE: 40,
+  FIELD_SCALE: 50,
   FORCE_STRENGTH: 0.6,
   OFFSET_SPEED: 0.08,
   TIME_OFFSET_SPEED: 0.01,
@@ -10,12 +10,9 @@ let Settings = {
   THICKNESS: 5,
   ALPHA: 255,
 
-  USE_RAINBOW: true,
   DRAW_VECTORS: false,
-  DRAW_PARTICLES: true,
-  DRAW_FPS: true,
-
-  Field: {
-    ENABLE_TIME: true,
-  },
+  DRAW_PARTICLES: false,
+  DRAW_NOISE: true,
+  DRAW_FPS: false,
+  USE_RAINBOW: false,
 };

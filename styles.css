@@ -29,11 +29,13 @@ h1 {
 }
 
 section.controls {
+  display: flex;
+  flex-direction: column;
   margin-left: 20px;
   background: #fff;
   color: #222;
   padding: 20px;
-  max-width: 200px;
+  min-width: 200px;
 }
 
 section.controls input {
@@ -52,4 +54,24 @@ section.controls h3:not(:first-of-type) {
 
 .cb-wrapper label {
   margin-left: 5px;
+}
+
+button {
+  width: 100%;
+  height: 30px;
+  border-radius: 999px;
+  font-weight: 600;
+  background: #6bff00;
+}
+
+button.toggled {
+  background: #ff0000;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }
