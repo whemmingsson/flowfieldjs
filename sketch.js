@@ -27,10 +27,6 @@ function initialize() {
   particles = [];
   initParticles();
   field = new Flowfield(floor(height / Settings.FIELD_SCALE), floor(width / Settings.FIELD_SCALE));
-  if (Settings.DRAW_VECTORS) {
-    drawVectorsInField();
-  }
-
   background(20);
 }
 
@@ -101,19 +97,11 @@ function clearBackground() {
 }
 
 function draw() {
-  field.create();
-
   if (Settings.DRAW_VECTORS || Settings.DRAW_NOISE) {
     background(20);
   }
 
-  if (Settings.DRAW_NOISE) {
-    drawNoise();
-  }
-
-  if (Settings.DRAW_VECTORS) {
-    drawVectorsInField();
-  }
+  field.updateAndDraw(drawVector, drawNoiseBox);
 
   if (Settings.DRAW_PARTICLES) {
     updateAndDrawParticles();
@@ -128,24 +116,7 @@ function draw() {
   }
 }
 
-function drawVectorsInField() {
-  strokeWeight(1);
-  for (let y = 0; y < field.rows; y++) {
-    for (let x = 0; x < field.columns; x++) {
-      drawVector(x, y);
-    }
-  }
-}
-
-function drawNoise() {
-  for (let y = 0; y < field.rows; y++) {
-    for (let x = 0; x < field.columns; x++) {
-      drawNoiseBox(x, y);
-    }
-  }
-}
-
-function drawVector(x, y) {
+function drawVector(x, y, v) {
   push();
   colorMode(RGB);
 
@@ -157,7 +128,7 @@ function drawVector(x, y) {
 
   strokeWeight(2);
   translate(x * Settings.FIELD_SCALE + Settings.FIELD_SCALE / 2, y * Settings.FIELD_SCALE + Settings.FIELD_SCALE / 2);
-  rotate(field.getVectorAt(x, y).heading());
+  rotate(v.heading());
   line(0, 0, Settings.FIELD_SCALE / 2, 0);
   const arrowHead = Settings.FIELD_SCALE / 5;
   line(Settings.FIELD_SCALE / 2 - arrowHead, arrowHead, Settings.FIELD_SCALE / 2, 0);
@@ -169,11 +140,11 @@ function drawVector(x, y) {
   pop();
 }
 
-function drawNoiseBox(x, y) {
+function drawNoiseBox(x, y, n) {
   push();
   noStroke();
   translate(x * Settings.FIELD_SCALE, y * Settings.FIELD_SCALE);
-  const noiseMappedGrayscaleValue = map(field.getNoiseValueAt(x, y), 0, 1, 0, 255);
+  const noiseMappedGrayscaleValue = map(n, 0, 1, 0, 255);
   fill(noiseMappedGrayscaleValue);
   rect(0, 0, Settings.FIELD_SCALE, Settings.FIELD_SCALE);
   noFill();

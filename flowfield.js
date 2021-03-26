@@ -5,7 +5,6 @@ class Flowfield {
     this.columns = columns;
     this.vectors = [];
     this.noiseValues = [];
-    this.create();
   }
 
   getVectors() {
@@ -20,7 +19,7 @@ class Flowfield {
     return this.noiseValues[y][x];
   }
 
-  create() {
+  updateAndDraw(onDrawVectors, onDrawNoise) {
     let yOffset = 0;
     for (let y = 0; y < this.rows; y++) {
       this.vectors[y] = [];
@@ -29,8 +28,17 @@ class Flowfield {
       for (let x = 0; x < this.columns; x++) {
         xOffset += Settings.OFFSET_SPEED;
         const noiseValue = noise(xOffset, yOffset, this.timeOffset);
-        this.setVectorAt(this.createForceVector(noiseValue), x, y);
+        const v = this.createForceVector(noiseValue);
+        this.setVectorAt(v, x, y);
         this.setNoiseValueAt(noiseValue, x, y);
+
+        if (Settings.DRAW_NOISE && onDrawNoise) {
+          onDrawNoise(x, y, noiseValue);
+        }
+
+        if (Settings.DRAW_VECTORS && onDrawVectors) {
+          onDrawVectors(x, y, v);
+        }
       }
       yOffset += Settings.OFFSET_SPEED;
     }

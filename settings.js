@@ -10,9 +10,9 @@ let Settings = {
   THICKNESS: 5,
   ALPHA: 255,
 
-  DRAW_VECTORS: false,
+  DRAW_VECTORS: true,
   DRAW_PARTICLES: false,
-  DRAW_NOISE: true,
+  DRAW_NOISE: false,
   DRAW_FPS: false,
   USE_RAINBOW: false,
 };
