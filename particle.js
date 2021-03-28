@@ -3,6 +3,7 @@ class Particle {
     if (startingPosition) this.position = startingPosition;
     else this.position = createVector(0, 0);
 
+    this.prevPositions = [];
     this.prevPosition = this.position.copy();
     this.velocity = createVector(0, 0);
     this.acceleration = createVector(0, 0);
@@ -24,7 +25,11 @@ class Particle {
   follow(flowField) {
     const x = floor(this.position.x / Settings.FIELD_SCALE);
     const y = floor(this.position.y / Settings.FIELD_SCALE);
-    this.applyForce(flowField[y][x]);
+    this.applyForce(flowField.getVectorAt(x,y));
+
+    if(Settings.DRAW_VISITED_BUBBLES) {
+      flowField.updateVisitedAt(x,y);
+    }
   }
 
   stopAtEdges() {
@@ -47,8 +52,8 @@ class Particle {
   }
 
   updatePrev() {
-    this.prevPosition.x = this.position.x;
-    this.prevPosition.y = this.position.y;
+    //this.prevPositions.push(this.position.copy());
+    this.prevPosition = this.position.copy();
   }
 
   render() {
@@ -66,9 +71,13 @@ class Particle {
 
     strokeWeight(Settings.THICKNESS);
 
-    line(
+    curve(
       this.prevPosition.x,
       this.prevPosition.y,
+      this.prevPosition.x,
+      this.prevPosition.y,
+      this.position.x,
+      this.position.y,
       this.position.x,
       this.position.y
     );
