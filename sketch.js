@@ -24,9 +24,10 @@ function setup() {
 }
 
 function initialize() {
+  field = new Flowfield(floor(height / Settings.FIELD_SCALE), floor(width / Settings.FIELD_SCALE));
   particles = [];
   initParticles();
-  field = new Flowfield(floor(height / Settings.FIELD_SCALE), floor(width / Settings.FIELD_SCALE));
+
   background(20);
 }
 
