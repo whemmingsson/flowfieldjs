@@ -36,6 +36,7 @@ section.controls {
   color: #222;
   padding: 20px;
   min-width: 200px;
+  font-size: 0.8rem;
 }
 
 section.controls input {

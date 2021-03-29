@@ -3,34 +3,41 @@ class Flowfield {
     this.timeOffset = 0;
     this.rows = rows;
     this.columns = columns;
-    this.vectors = [];
-    this.noiseValues = [];
-  }
-
-  getVectors() {
-    return this.vectors;
+    this.values = [];
   }
 
   getVectorAt(x, y) {
-    return this.vectors[y][x];
+    return this.values[y][x].vector;
   }
 
   getNoiseValueAt(x, y) {
-    return this.noiseValues[y][x];
+    return this.values[y][x].noise;
   }
 
-  updateAndDraw(onDrawVectors, onDrawNoise) {
+  updateVisitedAt(x,y) {
+  
+    if(!this.values[y][x].numberOfTimesVisited)
+      this.values[y][x].numberOfTimesVisited = 0;
+
+      this.values[y][x].numberOfTimesVisited++;   
+  }
+
+  updateAndDraw(onDrawVectors, onDrawNoise, onDrawBubble) {
     let yOffset = 0;
     for (let y = 0; y < this.rows; y++) {
-      this.vectors[y] = [];
-      this.noiseValues[y] = [];
+      if(!this.values[y])
+        this.values[y] = [];
       let xOffset = 0;
       for (let x = 0; x < this.columns; x++) {
         xOffset += Settings.OFFSET_SPEED;
         const noiseValue = noise(xOffset, yOffset, this.timeOffset);
         const v = this.createForceVector(noiseValue);
-        this.setVectorAt(v, x, y);
-        this.setNoiseValueAt(noiseValue, x, y);
+
+        if(!this.values[y][x])
+          this.values[y][x] = {numberOfTimesVisited:0};
+
+        this.values[y][x].noiseValue = noiseValue;
+        this.values[y][x].vector = v;
 
         if (Settings.DRAW_NOISE && onDrawNoise) {
           onDrawNoise(x, y, noiseValue);
@@ -38,6 +45,10 @@ class Flowfield {
 
         if (Settings.DRAW_VECTORS && onDrawVectors) {
           onDrawVectors(x, y, v);
+        }
+
+        if (Settings.DRAW_VISITED_BUBBLES) {
+          onDrawBubble(x, y, this.values[y][x].numberOfTimesVisited);
         }
       }
       yOffset += Settings.OFFSET_SPEED;
@@ -51,13 +62,5 @@ class Flowfield {
     let v = p5.Vector.fromAngle(angle);
     v.setMag(Settings.FORCE_STRENGTH);
     return v;
-  }
-
-  setVectorAt(v, x, y) {
-    this.vectors[y][x] = v;
-  }
-
-  setNoiseValueAt(n, x, y) {
-    this.noiseValues[y][x] = n;
   }
 }
